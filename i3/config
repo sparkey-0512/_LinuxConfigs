@@ -10,20 +10,22 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Wallpaper
-exec --no-startup-id feh --bg-center Pictures/wallpaper/hero_academia/shigaraki0.jpg &
-exec --no-startup-id copyq &
-exec --no-startup-id redshift &
-exec --no-startup-id picom &
+exec --no-startup-id feh --bg-scale --randomize ~/Downloads/variety-favourites &
+exec --no-startup-id .//.config/polybar/launch.sh --blocks &
+exec --no-startup-id google-chrome-stable $ws3 &
+#exec --no-startup-id copyq &
+#exec --no-startup-id redshift &
+#exec --no-startup-id picom &
 
 set $mod Mod4
 
 # Autofocus on hover, also when switching workspaces
-focus_follows_mouse yes
+focus_follows_mouse no
   # Borders
         # Also removes all title bars
-        for_window [class="^.*"] border pixel 2
-        default_border pixel 2
-        default_floating_border pixel 3
+        for_window [class="^.*"] border pixel 0
+        default_border pixel 0
+        default_floating_border pixel 0
 
 # Gaps
         # gaps inner|outer|horizontal|vertical|top|right|bottom|left <amount>
@@ -31,26 +33,26 @@ focus_follows_mouse yes
         # the inner affects spacing around each view
         # the outer affects the spacing around each workspace
         # To reduce or remove outer gaps, outer gaps can be set to a negative value.
-        gaps inner 10
-        gaps outer 2
-        gaps top 2
-        gaps bottom 2
+        gaps inner 5
+        gaps outer 0
+        gaps top 0
+        gaps bottom 0
     ##START THEMING WM
 
     # Window color settings
     # class                 border  backgr. text    indicator
-    client.focused          #FF2945 #FF2945 #ffffff #FF2945
+    client.focused          #FF2945 #285577 #ffffff #2e9ef4
     client.unfocused        #2e3440 #1f222d #888888 #1f222d
     client.focused_inactive #2e3440 #1f222d #888888 #1f222d
     client.placeholder      #2e3440 #1f222d #888888 #1f222d
-    client.urgent           #900000 #900000 #ffffff #900000
+    client.urgent           #900000 #ff2945 #ffffff #900000
 
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 16
+font pango:firacode medium 16
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -68,7 +70,7 @@ bindsym $mod+Return exec alacritty;focus
 bindsym $mod+x kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run -p ' '
+bindsym $mod+p exec dmenu_run -p ''
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -76,13 +78,20 @@ bindsym $mod+p exec dmenu_run -p ' '
 
 bindsym $mod+b exec google-chrome-stable
 
-bindsym $mod+Up exec amixer set Master 1%+
-bindsym $mod+Down exec amixer set Master 1%-
+# volume controls
+bindsym $mod+Right exec pamixer -i 5
+bindsym $mod+Left exec pamixer -d 5
+bindsym $mod+m exec pamixer -t
 
-bindsym $mod+Left exec brightnessctl set 1%-
-bindsym $mod+Right exec brightnessctl set 1%+
+# mic controls
+bindsym $mod+Shift+Right exec pamixer --default-source -i 5
+bindsym $mod+Shift+Left exec pamixer --default-source -d 5
+bindsym $mod+Shift+m exec pamixer --default-source -t 5
 
-bindsym $mod+v exec copyq menu
+bindsym $mod+Down exec brightnessctl set 1%-
+bindsym $mod+Up exec brightnessctl set 1%+
+
+#bindsym $mod+v exec copyq menu
 
 # change focus
 bindsym $mod+h focus left
@@ -123,7 +132,7 @@ bindsym $mod+space focus mode_toggle
 #bindsym $mod+d focus child
 
 # Workspaces
-set $ws1 "1:8"
+set $ws1 "1:"
 set $ws2 "2:"
 set $ws3 "3:"
 set $ws4 "4:"
